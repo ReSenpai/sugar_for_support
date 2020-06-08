@@ -1,0 +1,37 @@
+
+.ss-button {
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    -webkit-appearance: none!important;
+    border: 1px solid #0079b8;
+    min-width: 3rem;
+    max-width: 15rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    margin: 0 0 0 .5rem;
+    line-height: calc(1rem - 1px);
+    letter-spacing: .073em;
+    font-size: .458333rem;
+    font-weight: 500;
+    height: 1rem;
+    padding: 0 .5rem;
+    border-radius: .125rem;
+    touch-action: manipulation;
+    background-color: transparent;
+    color: #0079b8;
+}
+
+.ss-button:hover {
+    background-color: #e1f1f6;
+    color: #004a70;
+    text-decoration: none;
+}
+
+.ss-button:active {
+    box-shadow: 0 2px 0 0 #0095d3 inset;
+}
