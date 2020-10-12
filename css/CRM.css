@@ -1,4 +1,4 @@
-
+/* SS button */
 .ss-button {
     text-decoration: none;
     cursor: pointer;
@@ -13,7 +13,7 @@
     text-align: center;
     text-transform: uppercase;
     vertical-align: middle;
-    margin: 0 0 0 .5rem;
+    margin: 4px;
     line-height: calc(1rem - 1px);
     letter-spacing: .073em;
     font-size: .458333rem;
@@ -35,3 +35,46 @@
 .ss-button:active {
     box-shadow: 0 2px 0 0 #0095d3 inset;
 }
+
+/* Main style */
+
+/* :root {
+    --main-bg-color: #303641;
+    --border-color: #464f5f;
+    --bar-bg-color: #232830;
+    --header-color: #569cd6;
+    --chat-bg: #373e4b;
+    --hover-bar-bg: #4f5561;
+    --btn-bg: #303641;
+    --btn-border: #464f5f;
+    --btn-color: #f0f0f1;
+    --link-color: #ce9178;
+    --textarea: #2f3641;
+    --text: #d4d4d4;
+    --textLighter: #dddddd;
+    --green: #608b4e;
+}
+
+.main-container {
+    background: var(--main-bg-color) !important;
+}
+
+.header {
+    background: var(--bar-bg-color) !important;
+}
+
+.subnav {
+    box-shadow: 0 -1px 0 #ccc inset;
+    background-color: var(--bar-bg-color) !important;;
+}
+
+.nav .nav-link {
+    font-size: .583333rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    display: inline-block;
+    color: #f0e3e3;
+    padding: 0 .125rem;
+    box-shadow: none;
+    line-height: 1.5rem;
+} */

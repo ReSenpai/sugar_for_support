@@ -1,0 +1,260 @@
+:root {
+    --main-bg-color: #303641;
+    --border-color: #464f5f;
+    --bar-bg-color: #232830;
+    --header-color: #569cd6;
+    --chat-bg: #373e4b;
+    --hover-bar-bg: #4f5561;
+    --btn-bg: #303641;
+    --btn-border: #464f5f;
+    --btn-color: #f0f0f1;
+    --link-color: #ce9178;
+    --textarea: #2f3641;
+    --text: #d4d4d4;
+    --textLighter: #dddddd;
+    --green: #608b4e;
+}
+
+.page-container .main-content {
+    background: var(--main-bg-color) !important;
+}
+
+#id__chat__actions-wrapper > div {
+    border: 1px solid var(--border-color) !important;
+    background: var(--bar-bg-color) !important;
+}
+
+.has-switch span.switch-success.switch-left {
+    background-color: #519734 !important;
+    color: #edebeb !important;
+}
+
+.has-switch label {
+    border-left: 1px solid var(--border-color) !important;
+    border-right: 1px solid var(--border-color) !important;
+}
+
+.has-switch span.switch-warning.switch-right {
+    background-color: #cc2424cf !important;
+    color: #edebeb !important;
+}
+
+.has-switch {
+    border-color: var(--border-color) !important;
+}
+
+.panel-default {
+    border-color: var(--border-color) !important;
+}
+
+.panel-group.joined > .panel > .panel-heading {
+    background-color: var(--bar-bg-color) !important;
+}
+
+.member_list {
+    background: var(--main-bg-color) !important;
+}
+
+.panel {
+    background: var(--main-bg-color) !important;
+}
+
+.panel-default > .panel-heading > .panel-title > a {
+    color: var(--header-color) !important;
+}
+
+.panel-group.joined > .panel > .panel-heading + .panel-collapse {
+    background-color: var(--chat-bg) !important;
+}
+
+.panel-default > .panel-heading + .panel-collapse .panel-body {
+    border-top-color: var(--border-color) !important;
+}
+.panel-group .panel-heading + .panel-collapse .panel-body {
+    border-top: 1px solid var(--border-color) !important;
+}
+
+.member_list li {
+    border-bottom: 1px solid var(--bar-bg-color) !important;
+}
+
+.default-client {
+    background-color: var(--bar-bg-color) !important;
+    background-image: url('https://www.flaticon.com/premium-icon/icons/svg/1993/1993713.svg') !important;
+    border-radius: 25% !important;
+}
+
+.member_list li:hover {
+    background: var(--hover-bar-bg) !important;
+    color: var(--header-color) !important;
+}
+
+.message_section {
+    border: 1px solid var(--border-color) !important;
+}
+
+.new_message_head {
+    background: var(--bar-bg-color) !important;
+}
+
+.pull-left.agent-name {
+    color: var(--header-color) !important;
+}
+
+.btn-default {
+    color: var(--btn-color) !important;
+    background-color: var(--btn-bg) !important;
+    border-color: var(--btn-border) !important;
+}
+
+.btn-success, .btn-green {
+    color: #ffffff !important;
+    background-color: var(--green) !important;
+    border-color: #638754 !important;
+}
+
+.chat_area {
+    background: var(--chat-bg) !important;
+}
+
+.chat_container-row .chat_area__messages-scroll-link {
+    background-color: var(--bar-bg-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+.chat_area__messages-scroll-link .chat_area__messages-scroll-link-image {
+    background-image: url('https://image.flaticon.com/icons/svg/189/189074.svg') !important;
+}
+
+.profile-env section.profile-feed .profile-post-form {
+    border: 1px solid var(--border-color) !important;
+}
+
+#message {
+    background: var(--textarea) !important;
+}
+
+.profile-env section.profile-feed .profile-post-form .form-control {
+    color: var(--text);
+    background: var(--textarea) !important;
+}
+
+.empty-chat-block {
+    background: var(--main-bg-color) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.profile-env section.profile-feed .profile-post-form .form-options {
+    background: var(--main-bg-color) !important;
+    border-top: 1px solid var(--border-color) !important;
+}
+.profile-env section.profile-feed .profile-post-form .form-control {
+    color: var(--text) !important;
+}
+
+.message_write {
+    background: var(--main-bg-color) !important;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: var(--header-color) !important;
+}
+
+.chat-messages__date-message {
+    border-bottom: 1px solid  var(--link-color) !important;
+}
+
+.chat-messages__date-text {
+    background: var(--bar-bg-color) !important;
+    color:  var(--link-color) !important;
+}
+
+.messages-group__messages {
+    color: var(--textLighter) !important;
+}
+
+.chat-message__name-of-responder {
+    color: var(--header-color) !important;
+}
+
+.messages-group-item__user-info {
+    color: var(--link-color) !important;
+}
+
+a {
+    color: var(--link-color) !important;
+}
+
+.messages-group__message {
+    background-color: #2b3649 !important;
+}
+
+.message-group-item__file {
+    background-color: #2b3649 !important;
+}
+
+.default-operator {
+    background-image: url('https://image.flaticon.com/icons/svg/3145/3145170.svg') !important;
+    border-radius: 25% !important;
+    background-color: #292c2c !important;
+}
+
+.message-group-item__private {
+    background-color: #232830 !important;
+}
+
+/* .message-group-item__file-li {
+    background-color: #232830 !important;
+} */
+
+#chat_bottom > div.post-type.chat-actions-block > div.emoji__wrap-chat > i {
+    color: var(--link-color) !important;
+}
+
+#chat_bottom > div.post-type.chat-actions-block > a > label {
+    color: var(--link-color) !important;
+}
+
+#editable_macros_id, #reply-link-public, #reply-link-private {
+    color: var(--link-color) !important;
+}
+
+.emoji-dropdown {
+    background-color: var(--main-bg-color) !important;
+}
+
+#filename {
+    background: var(--textarea) !important;
+}
+
+.panel-primary {
+    border-color: var(--border-color) !important;
+}
+
+.browser-panel {
+    background: var(--chat-bg) !important;
+    color: var(--text) !important;
+}
+
+.active-chat {
+    color: var(--header-color) !important;
+    background: var(--link-color) !important;
+}
+
+/*Scroll-bar custom*/
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #20252c; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
