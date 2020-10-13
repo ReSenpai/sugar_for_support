@@ -2,10 +2,13 @@
     "manifest_version": 2,
     "name": "support_sugar",
     "description":"Улучшения внутренних инструментов Okko",
-    "version": "1.3.1", 
+    "version": "1.4.0", 
     "author": "Re Senpai",
     "permissions" : [
-      "clipboardWrite"
+      "clipboardWrite",
+      "tabs",
+      "notifications",
+      "*://*/*"
     ],
     "icons": {
       "48": "icon/48-ss.png",
@@ -19,6 +22,7 @@
       "scripts" : ["js/background.js"],
       "persistent" : false
     },
+    "web_accessible_resources": ["dark_mode.css"],
     "content_scripts": [{
         "css": ["css/webim.css"],
         "js": ["js/jquery-3.5.0.min.js", "js/webim.js"],

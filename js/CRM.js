@@ -131,6 +131,8 @@ function urlChecker () {
             storedHash = window.location.href;
             if (/\d+\/info/.test(storedHash)) {
                 timer(0);
+            }
+            if (/users/i.test(storedHash)) {
                 improveMultiLevelScheme();
             }
         }
@@ -168,7 +170,7 @@ const addCommentButton = 'body > crm-app > div > clr-main-container > crm-users 
 const treeCheckbox = 'body > crm-app > div > crm-comment-editor > crm-comment-modal > form > clr-modal > div > div.modal-dialog.ng-trigger.ng-trigger-fadeDown.modal-lg > div.modal-content-wrapper > div > div.modal-body > div:nth-child(1) > div > label';
 const miltiLevelScheme = {
     header: 'body > crm-app > div > crm-comment-editor > crm-comment-modal > form > clr-modal > div > div.modal-dialog.ng-trigger.ng-trigger-fadeDown.modal-lg > div.modal-content-wrapper > div > div.modal-header',
-    title: '#clr-id-12 > h3',
+    title: 'body > crm-app > div > crm-comment-editor > crm-comment-modal > form > clr-modal > div > div.modal-dialog.ng-trigger.ng-trigger-fadeDown.modal-lg > div.modal-content-wrapper > div > div.modal-header > div > h3',
     description: '#comment_description',
     production: '#multi_level_scheme__lists > div > div:nth-child(1) > select',
     category: '#multi_level_scheme__lists > div > div:nth-child(2) > select',
@@ -270,23 +272,28 @@ const forseCheckbox = () => {
         .catch(error => console.log(error));
 }
 /**
+ * Event button "Добавить комментарий"
+ */
+const commentButtonEvent = () => {
+    forseCheckbox();
+    deleteTitle(); // Автоматически меняются id
+    addButton('Возврат БК', [1,5,28,95]);
+    addButton('Отключение АП', [1,3,22,69]);
+    addButton('Мерж', [1,3,20,67]);
+    addButton('Отвязать карту', [1,5,30,104]);
+    addButton('Удалить акк', [1,3,19,66, 'Удаление аккаунта']);
+    addButton('Акции 306/302', [1,4,27,217]);
+    addButton('Ошибка 116', [1,3,18,268]);
+    addDeviceButton('Web', 'Web');
+}
+/**
  * Initiation scripts
  */
 function improveMultiLevelScheme() {
     getElement(addCommentButton)
     .then(element => {
-        element.addEventListener('click', () => {
-            forseCheckbox();
-            // deleteTitle(); // Автоматически меняются id
-            addButton('Возврат БК', [1,5,28,95]);
-            addButton('Отключение АП', [1,3,22,69]);
-            addButton('Мерж', [1,3,20,67]);
-            addButton('Отвязать карту', [1,5,30,104]);
-            addButton('Удалить акк', [1,3,19,66, 'Удаление аккаунта']);
-            addButton('Акции 306/302', [1,4,27,217]);
-            addButton('Ошибка 116', [1,3,18,268]);
-            addDeviceButton('Web', 'Web');
-        })
+        element.removeEventListener('click', commentButtonEvent);
+        element.addEventListener('click', commentButtonEvent);
     })
     .catch(error => console.log(error));
 }
@@ -294,6 +301,24 @@ function improveMultiLevelScheme() {
 improveMultiLevelScheme();
 urlChecker();
 
+
+// const darkModeButton = () => {
+//     const darkModeButton = createButton('DarkMode');
+//     darkModeButton.addEventListener('click', () => {
+//         const style = $('link[title="usedesk.css"]');
+//         if (style) {
+//             style.remove();
+//         }
+//         chrome.runtime.sendMessage('test');
+        
+//     });
+//     getElement('body > crm-app > div > clr-main-container > crm-users > nav > ul')
+//     .then(element => {
+//         element.appendChild(darkModeButton);
+//     })
+// }
+
+// darkModeButton();
 
 
 
