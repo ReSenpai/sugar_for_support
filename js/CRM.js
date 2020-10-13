@@ -101,7 +101,6 @@ function timer(counter) {
                 counter = 0;
                 return;
             } else if (counter > 50) {
-                console.log('Скрипт для кнопки "Баланс прописью" - не подхватился. Перезагрузите страницу');
                 return;
             } else {
                 timer(counter + 1)
@@ -117,7 +116,7 @@ function timer(counter) {
                 $temp.remove();
             });
         } catch (error) {
-            console.log(`Ошибка CRM в function timer; (${error})`);
+            console.error(`Ошибка CRM в function timer; (${error})`);
         }
     }, 300)
 } 
@@ -133,7 +132,7 @@ function urlChecker () {
                 timer(0);
             }
             if (/users/i.test(storedHash)) {
-                improveMultiLevelScheme();
+                runTemplateOnCommentsButton();
             }
         }
     }, 100); 
@@ -157,7 +156,7 @@ const getElement = (selectorPath) => new Promise((resolve, reject) => {
         }
         if (count === 100) {
             clearInterval(getSelector);
-            reject(`Time is up, 10 sec...`)
+            reject(`getElement false: Time is up, 10 sec...`)
         }
     }
 
@@ -166,8 +165,10 @@ const getElement = (selectorPath) => new Promise((resolve, reject) => {
 /**
  * selectors path
  */
-const addCommentButton = 'body > crm-app > div > clr-main-container > crm-users > div > crm-user-page > crm-user-detail > div > button:nth-child(1)';
+const COMMENT_BUTTON = 'body > crm-app > div > clr-main-container > crm-users > div > crm-user-page > crm-user-detail > div > button:nth-child(1)';
+const GENERAL_COMMENT_BUTTON = 'body > crm-app > div > clr-main-container > crm-app-header > clr-header > div.header-actions > a.nav-link.nav-text.add-comment';
 const treeCheckbox = 'body > crm-app > div > crm-comment-editor > crm-comment-modal > form > clr-modal > div > div.modal-dialog.ng-trigger.ng-trigger-fadeDown.modal-lg > div.modal-content-wrapper > div > div.modal-body > div:nth-child(1) > div > label';
+
 const miltiLevelScheme = {
     header: 'body > crm-app > div > crm-comment-editor > crm-comment-modal > form > clr-modal > div > div.modal-dialog.ng-trigger.ng-trigger-fadeDown.modal-lg > div.modal-content-wrapper > div > div.modal-header',
     title: 'body > crm-app > div > crm-comment-editor > crm-comment-modal > form > clr-modal > div > div.modal-dialog.ng-trigger.ng-trigger-fadeDown.modal-lg > div.modal-content-wrapper > div > div.modal-header > div > h3',
@@ -183,8 +184,12 @@ const miltiLevelScheme = {
  * Remove title
  */
 const deleteTitle = async () => {
-    const title = await getElement(miltiLevelScheme.title);
-    title.remove();
+    try {
+        const title = await getElement(miltiLevelScheme.title);
+        title.remove();
+    } catch (error) {
+        console.error(error);
+    }
 }
 /**
  * Create button html element
@@ -234,6 +239,19 @@ const addTemplateToButton = (button, template) => {
     })
 }
 /**
+ * Get element and append child
+ * @param {string} selector selector path
+ * @param {HTMLInputElement} child HTML input element
+ */
+const getElementAndAppendChild = (selector, child) => {
+    getElement(selector)
+    .then(element => {
+        element.appendChild(child);
+    })
+    .catch(error => console.error(error));
+}
+
+/**
  * Add a button to the header CO
  * @param {string} value Name button
  * @param {Array<number>} template array of select values to generate a pattern
@@ -241,10 +259,7 @@ const addTemplateToButton = (button, template) => {
 const addButton = (value, template) => {
     const button = createButton(value);
     addTemplateToButton(button, template);
-    getElement(miltiLevelScheme.header)
-    .then(header => {
-        header.appendChild(button);
-    });
+    getElementAndAppendChild(miltiLevelScheme.header, button);
 }
 /**
  * Add device button
@@ -256,10 +271,7 @@ const addDeviceButton = (value, deviceValue) => {
     button.addEventListener('click', async () => {
         setOption(miltiLevelScheme.platform, deviceValue);
     });
-    getElement(miltiLevelScheme.templateDevices)
-    .then(templateDevices => {
-        templateDevices.appendChild(button);
-    });
+    getElementAndAppendChild(miltiLevelScheme.templateDevices, button);
 }
 /**
  * Set the checkbox in an active position
@@ -272,11 +284,11 @@ const forseCheckbox = () => {
         .catch(error => console.log(error));
 }
 /**
- * Event button "Добавить комментарий"
+ * Template collector
  */
-const commentButtonEvent = () => {
+const collectTemplate = () => {
     forseCheckbox();
-    deleteTitle(); // Автоматически меняются id
+    deleteTitle();
     addButton('Возврат БК', [1,5,28,95]);
     addButton('Отключение АП', [1,3,22,69]);
     addButton('Мерж', [1,3,20,67]);
@@ -287,38 +299,29 @@ const commentButtonEvent = () => {
     addDeviceButton('Web', 'Web');
 }
 /**
- * Initiation scripts
+ * Setup template
+ * @param {string} selector path to element
  */
-function improveMultiLevelScheme() {
-    getElement(addCommentButton)
+const setupTemplate = (selector) => {
+    getElement(selector)
     .then(element => {
-        element.removeEventListener('click', commentButtonEvent);
-        element.addEventListener('click', commentButtonEvent);
+        element.removeEventListener('click', collectTemplate);
+        element.addEventListener('click', collectTemplate);
     })
     .catch(error => console.log(error));
 }
 
-improveMultiLevelScheme();
+function runTemplateOnCommentsButton() {
+    setupTemplate(COMMENT_BUTTON);
+}
+
+function runTemplateForGeneralCommentButton() {
+    setupTemplate(GENERAL_COMMENT_BUTTON);
+}
+
+runTemplateOnCommentsButton();
+runTemplateForGeneralCommentButton();
 urlChecker();
-
-
-// const darkModeButton = () => {
-//     const darkModeButton = createButton('DarkMode');
-//     darkModeButton.addEventListener('click', () => {
-//         const style = $('link[title="usedesk.css"]');
-//         if (style) {
-//             style.remove();
-//         }
-//         chrome.runtime.sendMessage('test');
-        
-//     });
-//     getElement('body > crm-app > div > clr-main-container > crm-users > nav > ul')
-//     .then(element => {
-//         element.appendChild(darkModeButton);
-//     })
-// }
-
-// darkModeButton();
 
 
 
