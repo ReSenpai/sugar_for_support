@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "support_sugar",
     "description":"Улучшения внутренних инструментов Okko",
-    "version": "1.4.0", 
+    "version": "1.4.1", 
     "author": "Re Senpai",
     "permissions" : [
       "clipboardWrite",
@@ -16,7 +16,7 @@
     },
     "browser_action": {
         "default_icon": "icon/ss.png",
-        "default_title": "Sugar for Support v. 1.3.1",
+        "default_title": "Sugar for Support v. 1.4.1",
         "default_popup" : "templates/popup.html" },
     "background" : {
       "scripts" : ["js/background.js"],
