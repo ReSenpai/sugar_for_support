@@ -31,6 +31,7 @@
       },
       {
         "css" : ["css/usedesk.css"],
+        "js": ["js/usedesk.js"],
         "matches": ["https://secure.usedesk.ru/*"]
       }
     ]

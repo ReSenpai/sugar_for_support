@@ -241,6 +241,10 @@ a {
     background: var(--link-color) !important;
 }
 
+#msg_container textarea {
+    color: var(--textLighter) !important;
+}
+
 /*Scroll-bar custom*/
 
 ::-webkit-scrollbar {
