@@ -290,7 +290,7 @@ const collectTemplate = () => {
     forseCheckbox();
     deleteTitle();
     addButton('Возврат БК', [1,5,28,95]);
-    addButton('Отключение АП', [1,3,22,69]);
+    addButton('Отключение АП', [1,3,22,327]);
     addButton('Мерж', [1,3,20,67]);
     addButton('Отвязать карту', [1,5,30,104]);
     addButton('Удалить акк', [1,3,19,66, 'Удаление аккаунта']);
