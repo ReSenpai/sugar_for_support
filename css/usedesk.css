@@ -203,9 +203,6 @@ a {
     background-color: #232830 !important;
 }
 
-/* .message-group-item__file-li {
-    background-color: #232830 !important;
-} */
 
 #chat_bottom > div.post-type.chat-actions-block > div.emoji__wrap-chat > i {
     color: var(--link-color) !important;
@@ -261,4 +258,47 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
+}
+
+/*
+    Css for scripts
+*/
+
+.pull-right {
+    display: flex !important;
+    flex-direction: row-reverse;
+}
+
+.btn-resenpai {
+    background-color: #254b6d !important;
+    margin: 3px !important;
+    color: var(--textLighter) !important;
+}
+
+.btn-resenpai:hover {
+    background-color: #1c3953 !important;
+    color: var(--textLighter) !important;
+}
+
+.btn-resenpai-wait {
+    background-color: #af7c29 !important;
+    margin: 0 !important;
+    margin-right: 4px !important;
+}
+
+.btn-resenpai-wait:hover {
+    background-color: #825815 !important;
+}
+
+
+.resepnai-wrapper {
+    position: absolute;
+    max-width: 300px;
+    background-color: rgba(0,0,0, .3);
+    z-index: 999999;
+    top: -1px;
+    right: 11px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    border-radius: 5px;
 }
