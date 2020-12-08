@@ -1,4 +1,17 @@
 /**
+ * selectors path
+ */
+const MEDIUM_BAR_BUTTONS = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat > div > div.chat-visible.chat_page_container > div > div.right_column > div.chat-panel.pd-0 > div.main_section > div > section > div.row.chat_container-row > div.new_message_head > div.pull-right';
+const TOP_BAR_BUTTONS = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat > div > div.chat-visible.chat_page_container > div > div.right_column > div.chat-panel.pd-0 > div.main_section > div > section > div.row.chat_container-row > div.new_message_head > div.pull-left';
+const MENU_BUTTON = '#editable_fields';
+const MAIN_CONTENT = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat';
+let BUTTONS_TABLE;
+const MENU = '#ticket-fields-form';
+const menu = {
+    waitCheckbox: '#ticket-fields-form > div:nth-child(2) > div > label.cb-wrapper',
+    submit: '#ticket-fields-form > div.popover-content.additional-fields-buttons > div > div > button',
+}
+/**
  * Promise - get element
  * @param {string} selectorPath path to selector
  */
@@ -20,29 +33,22 @@ const getElement = (selectorPath) => new Promise((resolve, reject) => {
 
     setInterval(getSelector, 100);
 });
-/**
- * selectors path
- */
-const MEDIUM_BAR_BUTTONS = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat > div > div.chat-visible.chat_page_container > div > div.right_column > div.chat-panel.pd-0 > div.main_section > div > section > div.row.chat_container-row > div.new_message_head > div.pull-right';
-const TOP_BAR_BUTTONS = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat > div > div.chat-visible.chat_page_container > div > div.right_column > div.chat-panel.pd-0 > div.main_section > div > section > div.row.chat_container-row > div.new_message_head > div.pull-left';
-const MENU_BUTTON = '#editable_fields';
-const MAIN_CONTENT = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat';
-let BUTTONS_TABLE;
-const menu = {
-    waitCheckbox: '#ticket-fields-form > div:nth-child(2) > div > label.cb-wrapper',
-    submit: '#ticket-fields-form > div.popover-content.additional-fields-buttons > div > div > button',
-    product: {
-        path: '#ticket-fields-form > div:nth-child(6) > select',
-    },
-    section: {
-        path: '#ticket-fields-form > div:nth-child(8) > select',
-    },
-    category: {
-        path: '#ticket-fields-form > div:nth-child(10) > select',
-    },
-    result: {
-        path: '#ticket-fields-form > div:nth-child(12) > select',
+
+const getSelects = async () => {
+    const menu = await getElement(MENU);
+    let selects = [];
+
+    const recursy = (element) => {
+        element.childNodes.forEach(node => {
+            if (/^SELECT/.test(node.nodeName)) {
+                selects.push(node);
+            } else {
+                recursy(node)
+            }
+        })
     }
+    recursy(menu);
+    return selects;
 }
 
 const addButtonsTable = async () => {
@@ -58,11 +64,10 @@ const addButtonsTable = async () => {
  * @param {string} text Option name
  */
 const getOptions = async (select ,text) => {
-    const selectElement = await getElement(select);
     let optionValue;
-    if (selectElement.hasChildNodes()) {
+    if (select.hasChildNodes()) {
         const regex = new RegExp(`^${text}$`, 'i');
-        selectElement.childNodes.forEach(node => {
+        select.childNodes.forEach(node => {
             if (regex.test(node.textContent) && node.tagName === 'OPTION') {
                 return optionValue = node.value;
             }
@@ -80,6 +85,23 @@ const createButton = (name) => {
     button.classList.add('btn', 'btn-resenpai');
     button.value = name;
     return button;
+}
+
+const createDoubleButton = (name) => {
+    const buttonLeft = document.createElement('span');
+    const buttonRight = document.createElement('span');
+    const buttonContainer = document.createElement('div');
+
+    buttonContainer.classList.add('button-resenpai');
+    buttonLeft.classList.add('button-resenpai-left');
+    buttonRight.classList.add('button-resenpai-right');
+    buttonContainer.textContent = name;
+    buttonContainer.append(buttonLeft, buttonRight);
+    return {
+        buttonLeft,
+        buttonRight,
+        buttonContainer
+    }
 }
 
 const forseClick = async (element) => {
@@ -103,25 +125,31 @@ const applyWaitCheckbox = async () => {
 
 const setOption = async (selector, template) => {
     const event = new Event('change');
-    const element = await getElement(selector);
-    element.value = template;
-    element.dispatchEvent(event);
+    selector.value = template;
+    selector.dispatchEvent(event);
 }
 
 const addTemplateToButton = (button, template) => {
-    button.addEventListener('click', async () => {
+    async function setTemplate(right) {
         await openMenu();
-        const productPath = menu.product.path;
-        const sectionPath = menu.section.path;
-        const categoryPath = menu.category.path;
-        const resultPath = menu.result.path;
-        const paths = [productPath, sectionPath, categoryPath, resultPath];
-        const [product, section, category, result] = template.map((name, i) => getOptions(paths[i], name));
-        await setOption(productPath, await product);
-        await setOption(sectionPath, await section);
-        await setOption(categoryPath, await category);
-        await setOption(resultPath, await result);
+        const selects = await getSelects();
+        const [product, section, category, result] = selects;
+        const [productOption, sectionOption, categoryOption, resultOption] = template.map((name, i) => {
+            return getOptions(selects[i], name)
+        });
+        await setOption(product, await productOption);
+        await setOption(section, await sectionOption);
+        await setOption(category, await categoryOption);
+        right && await setOption(result, await resultOption);
         await submitMenu();
+    }
+
+    button.buttonLeft.addEventListener('click', async () => {
+        await setTemplate();
+    })
+
+    button.buttonRight.addEventListener('click', async () => {
+        await setTemplate(true);
     })
 }
 
@@ -133,12 +161,10 @@ const getElementAndAppendChild = (selector, child) => {
     .catch(error => console.error(error));
 }
 
-
-
 const addButton = async (name, template) => {
-    const button = createButton(name);
+    const button = createDoubleButton(name);
     addTemplateToButton(button, template);
-    BUTTONS_TABLE.appendChild(button);
+    BUTTONS_TABLE.appendChild(button.buttonContainer);
 }
 
 const addWaitButton = async () => {
@@ -158,6 +184,8 @@ const collectTemplate = async () => {
     addButton('Отключение АП', ['Кино', 'Аккаунт', 'Выключение автопродления', 'Отключение автопродления']);
     addButton('Отвязать карту', ['Кино', 'Фин вопросы', 'Проблемы с оплатой', 'Отвязка карты']);
     addButton('АП', ['Кино', 'Продукт', 'Подписки', 'Консультация по подпискам']);
+    addButton('Откл Устр', ['Кино', 'Аккаунт', 'Отключение устройств', '-']);
+    addButton('Подкл Устр', ['Кино', 'Аккаунт', 'Подключение устройств', 'Ошибка 116']);
     addButton('Удалить АКК', ['Кино', 'Аккаунт', 'Удаление аккаунта', '-']);
     addButton('Изменить Почт/Тел', ['Кино', 'Аккаунт', 'Информация по авторизации', 'Изменения номера телефона_почты']);
     addButton('Альт Сеть', ['Кино', 'Проблемы с просмотром контента', 'Сетевые проблемы со стороны клиента', 'Альтернативная сеть']);
