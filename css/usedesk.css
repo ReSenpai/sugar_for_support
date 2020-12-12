@@ -294,23 +294,27 @@ a {
 .resepnai-wrapper {
     position: absolute;
     max-width: 300px;
-    max-height: 150px;
+    max-height: 95vh;
+    height: 150px;
     overflow-y: scroll;
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .1);
     z-index: 999999;
     top: -1px;
     right: 11px;
     display: inline-flex;
     flex-wrap: wrap;
     border-radius: 5px;
+    justify-content: center;
+    resize: vertical;
 }
 
 .button-resenpai {
     padding: 8px 15px;
     margin: 2px;
+    max-height: 32px;
     font-size: 12px;
     background:#052a4a;
-    color: rgb(255, 255, 255, .9);
+    color: rgb(255, 255, 255, 1);
     border: none;
     position: relative;
     border-radius: 50px;
@@ -321,6 +325,7 @@ a {
     top: 0;
     height: 100%;
     width: 50%;
+    transition: all 0.15s linear;
 }
 
 .button-resenpai-left {
@@ -336,9 +341,9 @@ a {
 .button-resenpai-right {
     border-radius: 0 50px 50px 0;
     right: 0;
-    background-color: rgba(63, 81, 181, .1);
+    background-color: rgba(17, 146, 86, 0.2);
 }
 
 .button-resenpai-right:hover {
-    background-color: rgba(63, 81, 181, .3);
+    background-color: rgba(27, 184, 111, 0.3);
 }
