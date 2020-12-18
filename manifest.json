@@ -26,7 +26,7 @@
     "content_scripts": [
       {
         "css": ["css/CRM.css"],
-        "js": ["js/jquery-3.5.0.min.js","js/CRM.js"],
+        "js": ["js/CRM.js"],
         "matches": ["http://crm.spb.play.dc/users/*"]
       },
       {
