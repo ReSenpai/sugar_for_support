@@ -1,3 +1,5 @@
+// Тут будущий задел под переключение найтмода из popup
+
 let state = false;
 
 chrome.runtime.onMessage.addListener((message, callback) => {
