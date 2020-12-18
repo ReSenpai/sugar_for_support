@@ -116,6 +116,7 @@
 
 .chat_area {
     background: var(--chat-bg) !important;
+    font-size: 15px;
 }
 
 .chat_container-row .chat_area__messages-scroll-link {
@@ -156,6 +157,7 @@
 
 .message_write {
     background: var(--main-bg-color) !important;
+    font-size: 15px;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
