@@ -33,7 +33,9 @@ const getElement = (selectorPath) => new Promise((resolve, reject) => {
 
     setInterval(getSelector, 100);
 });
-
+/**
+ * Finds all the selects inside the menu
+ */
 const getSelects = async () => {
     const menu = await getElement(MENU);
     let selects = [];
@@ -50,7 +52,9 @@ const getSelects = async () => {
     recursy(menu);
     return selects;
 }
-
+/**
+ * Adds a template button panel to the page
+ */
 const addButtonsTable = async () => {
     const main = await getElement(MAIN_CONTENT);
     const wrapper = document.createElement('div');
@@ -86,7 +90,10 @@ const createButton = (name) => {
     button.value = name;
     return button;
 }
-
+/**
+ * Creates a double button and sets a template in it (left cropped to -1 option, right full)
+ * @param {string} name Button name
+ */
 const createDoubleButton = (name) => {
     const buttonLeft = document.createElement('span');
     const buttonRight = document.createElement('span');
@@ -103,7 +110,10 @@ const createDoubleButton = (name) => {
         buttonContainer
     }
 }
-
+/**
+ * Clicks on the item
+ * @param {HTMLElement} element The item you want to click
+ */
 const forseClick = async (element) => {
     const menu = await getElement(element);
     menu.click();
@@ -122,13 +132,21 @@ const applyWaitCheckbox = async () => {
     await forseClick(menu.waitCheckbox);
     await submitMenu();
 }
-
+/**
+ * Set the option in select
+ * @param {HTMLElement} selector current select
+ * @param {number} template Option value
+ */
 const setOption = async (selector, template) => {
     const event = new Event('change');
     selector.value = template;
     selector.dispatchEvent(event);
 }
-
+/**
+ * Set a template in a button
+ * @param {HTMLElement} button Button
+ * @param {string} template Template
+ */
 const addTemplateToButton = (button, template) => {
     async function setTemplate(right) {
         await openMenu();
@@ -160,13 +178,19 @@ const getElementAndAppendChild = (selector, child) => {
     })
     .catch(error => console.error(error));
 }
-
+/**
+ * Add button
+ * @param {string} name Button name
+ * @param {string} template Full template diagram by options
+ */
 const addButton = async (name, template) => {
     const button = createDoubleButton(name);
     addTemplateToButton(button, template);
     BUTTONS_TABLE.appendChild(button.buttonContainer);
 }
-
+/**
+ * Adds a button - wait
+ */
 const addWaitButton = async () => {
     const playgroundMedium = await getElement(MEDIUM_BAR_BUTTONS);
     const button = createButton('Ждем');
@@ -174,10 +198,10 @@ const addWaitButton = async () => {
     button.addEventListener('click', applyWaitCheckbox);
     playgroundMedium.appendChild(button);
 }
-
-const collectTemplate = async () => {
-    await addButtonsTable();
-    await addWaitButton();
+/** 
+ * Collects templates
+ */
+const collectTemplate = () => {
     addButton('Возврат БК', ['Кино', 'Фин вопросы', 'Возврат', 'Возврат на БК']);
     addButton('Возврат Баланс', ['Кино', 'Фин вопросы', 'Возврат', 'Возврат на счёт в Окко']);
     addButton('Мерж', ['Кино', 'Аккаунт', 'Объединение аккаунтов', '-']);
@@ -197,4 +221,10 @@ const collectTemplate = async () => {
     addButton('Сбр. Завод', ['Кино', 'Проблемы с просмотром контента', 'Сетевые проблемы со стороны клиента', 'Сброс до заводских настроек']);
 }
 
-collectTemplate();
+const renderApp = async () => {
+    await addButtonsTable();
+    await addWaitButton();
+    collectTemplate();
+}
+
+renderApp();
