@@ -1,8 +1,10 @@
 /**
  * selectors path
+ * const MEDIUM_BAR_BUTTONS = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat > div > div.chat-visible.chat_page_container > div > div.right_column > div.chat-panel.pd-0 > div.main_section > div > section > div.row.chat_container-row > div.new_message_head > div.pull-right';
+ * const TOP_BAR_BUTTONS = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat > div > div.chat-visible.chat_page_container > div > div.right_column > div.chat-panel.pd-0 > div.main_section > div > section > div.row.chat_container-row > div.new_message_head > div.pull-left';
  */
-const MEDIUM_BAR_BUTTONS = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat > div > div.chat-visible.chat_page_container > div > div.right_column > div.chat-panel.pd-0 > div.main_section > div > section > div.row.chat_container-row > div.new_message_head > div.pull-right';
-const TOP_BAR_BUTTONS = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat > div > div.chat-visible.chat_page_container > div > div.right_column > div.chat-panel.pd-0 > div.main_section > div > section > div.row.chat_container-row > div.new_message_head > div.pull-left';
+const MEDIUM_BAR_BUTTONS = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat > div.chat_layout > div.chat-visible.chat_page_container > div.row > div.right_column > div.chat-panel.pd-0 > div.main_section > div.chat_container.profile-env > section.col-sm-12.message_section.profile-feed > div.row.chat_container-row > div.new_message_head > div.left-buttons';
+const TOP_BAR_BUTTONS = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat > div.chat_layout > div.chat-visible.chat_page_container > div.row > div.right_column > div.chat-panel.pd-0 > div.main_section > div.chat_container.profile-env > section.col-sm-12.message_section.profile-feed > div.row.chat_container-row > div.new_message_head > div.right-buttons';
 const MENU_BUTTON = '#editable_fields';
 const MAIN_CONTENT = 'body > div.page-container.sidebar-collapsed > div.main-content.main-content_chat';
 let BUTTONS_TABLE;
